@@ -1,0 +1,48 @@
+//this file will hold the resources for the route paths beginning with '/api/session'
+const express = require('express');
+const asyncHandler = require('express-async-handler');
+
+const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { User } = require('../../db/models');
+
+const router = express.Router();
+
+// Log in
+router.post(
+    '/',
+    asyncHandler(async (req, res, next) => {
+        const { credential, password } = req.body;
+
+        const user = await User.login({ credential, password });
+
+        if (!user) {
+            const err = new Error('Login failed');
+            err.status = 401;
+            err.title = 'Login failed';
+            err.errors = ['The provided credentials were invalid.'];
+            return next(err);
+        }
+
+        await setTokenCookie(res, user);
+
+        return res.json({
+            user
+        });
+    })
+);
+// Testing the login above by making fetch call in console at /hello/world for demo user 
+//     (tried with email credential as well, and invalid credential which returned 404 and error handling)
+// fetch('/api/session', {
+//     method: 'POST',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "XSRF-TOKEN": `40t6aECZ-k1y_zv6EcLLBE-pmSc-jTVShSaA`
+//     },
+//     body: JSON.stringify({ credential: 'DemoUser', password: 'Password1!' })
+// }).then(res => res.json()).then(data => console.log(data));
+
+
+
+
+
+module.exports = router;
