@@ -53,6 +53,14 @@ router.delete(
 //     body: JSON.stringify({ credential: 'DemoUser', password: 'Password1!' })
 // }).then(res => res.json()).then(data => console.log(data));
 
+//testing logout route with fetch call in console
+// fetch('/api/session', {
+//     method: 'DELETE',
+//     headers: {
+//       "Content-Type": "application/json",
+//       "XSRF-TOKEN": `MFKJcOoN-d01HNVmLvAuFGphwr4nlqYf7euw`
+//     }
+//   }).then(res => res.json()).then(data => console.log(data));
 
 
 
