@@ -5,11 +5,26 @@ const asyncHandler = require('express-async-handler');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+
 const router = express.Router();
+
+const validateLogin = [
+    check('credential')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage('Please provide a valid email or username.'),
+    check('password')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a password.'),
+    handleValidationErrors
+];
 
 // Log in
 router.post(
     '/',
+    validateLogin,
     asyncHandler(async (req, res, next) => {
         const { credential, password } = req.body;
 
@@ -54,7 +69,15 @@ router.get(
     }
 );
 
-
+//test empty values (pass vs username) to get bad request and proper errors
+// fetch('/api/session', {
+//     method: 'POST',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "XSRF-TOKEN": `A0jwCKn6-vzGYltSIa1LeWzAqVMt9TIQmR-U`
+//     },
+//     body: JSON.stringify({ credential: '', password: 'password' })
+// }).then(res => res.json()).then(data => console.log(data));
 
 // Testing the login above by making fetch call in console at /hello/world for demo user 
 //     (tried with email credential as well, and invalid credential which returned 404 and error handling)
