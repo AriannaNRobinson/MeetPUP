@@ -30,13 +30,25 @@ router.post(
         });
     })
 );
+
+// Log out
+router.delete(
+    '/',
+    (_req, res) => {
+        res.clearCookie('token');
+        return res.json({ message: 'success' });
+    }
+);
+
+
+
 // Testing the login above by making fetch call in console at /hello/world for demo user 
 //     (tried with email credential as well, and invalid credential which returned 404 and error handling)
 // fetch('/api/session', {
 //     method: 'POST',
 //     headers: {
 //         "Content-Type": "application/json",
-//         "XSRF-TOKEN": `40t6aECZ-k1y_zv6EcLLBE-pmSc-jTVShSaA`
+//         "XSRF-TOKEN": `MFKJcOoN-d01HNVmLvAuFGphwr4nlqYf7euw`
 //     },
 //     body: JSON.stringify({ credential: 'DemoUser', password: 'Password1!' })
 // }).then(res => res.json()).then(data => console.log(data));
