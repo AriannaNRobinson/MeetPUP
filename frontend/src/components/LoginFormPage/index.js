@@ -26,7 +26,7 @@ function LoginFormPage() {
     }
 
     return (
-        <div className='form-container'>
+        <div className='login-form-container'>
             <form className='form' onSubmit={handleSubmit}>
                 <h2>Log into your account...</h2>
                 <ul>
