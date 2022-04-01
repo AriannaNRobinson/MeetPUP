@@ -69,37 +69,5 @@ router.get(
     }
 );
 
-//test empty values (pass vs username) to get bad request and proper errors
-// fetch('/api/session', {
-//     method: 'POST',
-//     headers: {
-//         "Content-Type": "application/json",
-//         "XSRF-TOKEN": `A0jwCKn6-vzGYltSIa1LeWzAqVMt9TIQmR-U`
-//     },
-//     body: JSON.stringify({ credential: '', password: 'password' })
-// }).then(res => res.json()).then(data => console.log(data));
-
-// Testing the login above by making fetch call in console at /hello/world for demo user 
-//     (tried with email credential as well, and invalid credential which returned 404 and error handling)
-// fetch('/api/session', {
-//     method: 'POST',
-//     headers: {
-//         "Content-Type": "application/json",
-//         "XSRF-TOKEN": `MFKJcOoN-d01HNVmLvAuFGphwr4nlqYf7euw`
-//     },
-//     body: JSON.stringify({ credential: 'DemoUser', password: 'Password1!' })
-// }).then(res => res.json()).then(data => console.log(data));
-
-//testing logout route with fetch call in console
-// fetch('/api/session', {
-//     method: 'DELETE',
-//     headers: {
-//       "Content-Type": "application/json",
-//       "XSRF-TOKEN": `MFKJcOoN-d01HNVmLvAuFGphwr4nlqYf7euw`
-//     }
-//   }).then(res => res.json()).then(data => console.log(data));
-
-
-
 
 module.exports = router;
