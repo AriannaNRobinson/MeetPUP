@@ -1,3 +1,57 @@
+body {
+    background-color: #95c7cc;
+}
+
+#navbar {
+    /* background-color: #42A174; */
+    background-color: #2E9464;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 76px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#home-container {
+    text-decoration: none;
+    color: white;
+    /* background-color: #AD3678;
+    border: 2px solid #AD3678; */
+    background-color: #36A2AD;
+    border: 2px solid #36A2AD;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    font-size: 25px;
+    padding-top: 8px;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    align-self: center;
+    text-align: center;
+}
+
+#home-container:hover {
+    cursor: pointer;
+    background-color: #31909b;
+    border: 2px solid #31909b;
+}
+
+h1 {
+    color: white;
+    letter-spacing: 2px;
+}
+
+.login-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 10px;
+}
+
 .profile-icon {
     font-size: 28px;
     color: white;
@@ -13,14 +67,17 @@
 }
 
 .profile-button:hover {
-    border-bottom-right-radius: 0px;
-    background-color: #AD3678;
-    border: 2px solid #AD3678;
+    /* border-bottom-right-radius: 0px;
+    background-color: #ad363c;
+    border: 2px solid #ad363c; */
+    cursor: pointer;
+    background-color: #31909b;
+    border: 2px solid #31909b;
 }
 
 .profile-container {
-    position: absolute;
-    top: 10px;
+    position: relative;
+    top: 12px;
     right: 10px;
     display: flex;
     flex-direction: column;
@@ -28,6 +85,8 @@
 }
 
 .profile-dropdown {
+    position: absolute;
+    top: 35px;
     width: 250px;
     color: white;
     background-color: #36A2AD;
@@ -51,6 +110,9 @@
 }
 
 #logout-button:hover {
-    background-color: #AD3678;
-    border: 2px solid #AD3678;
+    /* background-color: #AD3678;
+    border: 2px solid #AD3678; */
+    background-color: #ad363c;
+    border: 2px solid #ad363c;
+    cursor: pointer;
 }
