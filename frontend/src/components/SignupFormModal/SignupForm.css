@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 600px;
+    /* height: 480px; */
 }
 
 .signup-button {
@@ -12,7 +12,12 @@
     margin-bottom: 30px;
     color: white;
     font-weight: bold;
-    background-color: #36A2AD;
-    border: 2px solid #36A2AD;
+    background-color: #5CE1A3;
+    border: 2px solid #5CE1A3;
     border-radius: 5px;
+}
+
+.signup-button:hover {
+    background-color: #54cc94;
+    border: 2px solid #54cc94;
 }
