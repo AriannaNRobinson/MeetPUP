@@ -1,10 +1,18 @@
 body {
-    background-color: #95c7cc;
+    /* background-color: #95c7cc; */
+    /* background-color: #98cbb4; */
+    /* background-color: #98cbb4b2; */
+    background-color: #f5fdc6;
+
 }
 
 #navbar {
     /* background-color: #42A174; */
-    background-color: #2E9464;
+    /* background-color: #2E9464; */
+    /* background-color: #214f4b; */
+    /* background: linear-gradient(#214f4b, #214f4b, #2e9464); */
+    /* background-color: #0d5d56; */
+    background: linear-gradient(#168d5f, #0d5d56, #0d5d56, #0d5d56, #0d5d56);
     position: fixed;
     top: 0px;
     left: 0px;
@@ -12,15 +20,42 @@ body {
     height: 76px;
     display: flex;
     justify-content: space-between;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.button {
+    height: 25px;
+    width: 100px;
+    font-weight: bold;
+    color: white;
+    background-color: #193b39;
+    border: 2px solid #193b39;
+    border-radius: 5px;
+}
+
+.button:hover {
+    /* background-color: #24754f;
+    border: 2px solid #24754f; */
+    background-color: #102524;
+    border: 2px solid #102524;
+    cursor: pointer;
 }
 
 #home-container {
     text-decoration: none;
-    color: white;
+    /* color: white; */
+    /* color: #214f4b;
+    color: #0d5d56; */
+    color: #193b39;
     /* background-color: #AD3678;
     border: 2px solid #AD3678; */
-    background-color: #36A2AD;
-    border: 2px solid #36A2AD;
+    /* background-color: #36A2AD;
+    border: 2px solid #36A2AD; */
+    background-color: #ffd25a;
+    border: 2px solid #ffd25a;
+    background-color: #ffe45e;
+    border: 2px solid #ffe45e;
     border-radius: 10px;
     border-bottom-left-radius: 0px;
     font-size: 25px;
@@ -35,8 +70,11 @@ body {
 
 #home-container:hover {
     cursor: pointer;
-    background-color: #31909b;
-    border: 2px solid #31909b;
+    /* background-color: #31909b;
+    border: 2px solid #31909b; */
+    /* box-shadow: 0 0 1px 1px #ffd25a; */
+    /* transform: translateY(-2px); */
+    transform: rotate(-8deg);
 }
 
 h1 {
@@ -54,14 +92,19 @@ h1 {
 
 .profile-icon {
     font-size: 28px;
-    color: white;
+    /* color: white; */
+    color: #214f4b;
 }
 
 .profile-button {
     width: 50px;
     height: 50px;
-    background-color: #36A2AD;
-    border: 2px solid #36A2AD;
+    /* background-color: #36A2AD;
+    border: 2px solid #36A2AD; */
+    background-color: #ffd25a;
+    border: 2px solid #ffd25a;
+    background-color: #ffe45e;
+    border: 2px solid #ffe45e;
     border-radius: 10px;
     border-bottom-right-radius: 0px;
 }
@@ -70,9 +113,10 @@ h1 {
     /* border-bottom-right-radius: 0px;
     background-color: #ad363c;
     border: 2px solid #ad363c; */
+    /* background-color: #31909b;
+    border: 2px solid #31909b; */
     cursor: pointer;
-    background-color: #31909b;
-    border: 2px solid #31909b;
+    transform: rotate(8deg);
 }
 
 .profile-container {
@@ -88,9 +132,15 @@ h1 {
     position: absolute;
     top: 35px;
     width: 250px;
-    color: white;
-    background-color: #36A2AD;
-    border: 2px solid #36A2AD;
+    /* color: white; */
+    /* background-color: #36A2AD;
+    border: 2px solid #36A2AD; */
+    /* color: #214f4b; */
+    color: #193b39;
+    background-color: #ffd25a;
+    border: 2px solid #ffd25a;
+    background-color: #ffe45e;
+    border: 2px solid #ffe45e;
     border-radius: 10px;
     border-top-right-radius: 0px;
 }
@@ -102,17 +152,31 @@ h1 {
 #logout-button {
     height: 25px;
     width: 100px;
-    color: white;
+    /* color: white; */
     font-weight: bold;
-    background-color: #E4979B;
-    border: 2px solid #E4979B;
+    /* background-color: #E4979B;
+    border: 2px solid #E4979B; */
+    /* background-color: #7ba098;
+    border: 2px solid #7ba098; */
+    /* background-color: #b5fed9;
+    border: 2px solid #b5fed9; */
+    color: white;
+    background-color: #214f4b;
+    border: 2px solid #214f4b;
+    background-color: #193b39;
+    border: 2px solid #193b39;
     border-radius: 5px;
 }
 
 #logout-button:hover {
     /* background-color: #AD3678;
     border: 2px solid #AD3678; */
-    background-color: #ad363c;
-    border: 2px solid #ad363c;
+    /* background-color: #ad363c;
+    border: 2px solid #ad363c; */
+    color: rgb(194, 63, 63);
+    /* background-color: #24754f;
+    border: 2px solid #24754f; */
+    background-color: #102524;
+    border: 2px solid #102524;
     cursor: pointer;
 }

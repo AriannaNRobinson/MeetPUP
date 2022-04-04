@@ -15,12 +15,18 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 #modal-content {
     position: absolute;
-    background-color: #36A2AD;
+    /* background-color: #36A2AD;
     border: 2px solid #36A2AD;
+    background-color: #0c8346;
+    border: 2px solid #0c8346;
+    background-color: #0d5d56;
+    border: 2px solid #0d5d56; */
+    background: linear-gradient(0.16turn, #168d5f, #0d5d56, #0d5d56);
+
     border-radius: 10px;
 }
