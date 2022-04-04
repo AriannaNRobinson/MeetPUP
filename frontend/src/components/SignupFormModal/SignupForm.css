@@ -5,20 +5,7 @@
     /* height: 480px; */
 }
 
-.signup-button {
-    height: 25px;
-    width: 100px;
-    /* margin: 10px; */
-    /* margin-bottom: 30px; */
-    color: white;
-    font-weight: bold;
-    background-color: #5CE1A3;
-    border: 2px solid #5CE1A3;
-    border-radius: 5px;
-}
-
-.signup-button:hover {
-    background-color: #54cc94;
-    border: 2px solid #54cc94;
-    cursor: pointer;
+#signup-button {
+    margin-bottom: 30px;
+    margin-top: 10px;
 }
