@@ -25,7 +25,7 @@ const AllEvents = ({ events }) => {
                     <div className='events' key={event.id}>
                         <div className='name-and-button'>
                             <p id='event-name'>{event.name}</p>
-                            <button className='button' id='details-button' onclick={redirectToSingleEvent}>Details</button>
+                            <button className='button' id='details-button' onClick={redirectToSingleEvent}>Details</button>
                             <button className='button'>RSVP</button>
                         </div>
                         <div className='event-details'>

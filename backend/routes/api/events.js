@@ -29,7 +29,7 @@ router.post('/', asyncHandler(async (req, res) => {
         groupId
     })
     await newEvent.save();
-    res.json({ message: 'New event was created' })
+    res.json({ newEvent, message: 'New event was created' })
 }))
 //TESTING
 // window.fetch('/api/events/', {

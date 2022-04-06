@@ -30,9 +30,8 @@ const CreateEvent = ({ userId }) => {
         }
 
         const newEvent = await dispatch(postEvent(formData))
-        console.log(newEvent)
         if (newEvent) {
-            history.push(`/events/${newEvent.id}`)
+            history.push(`/events/${newEvent.newEvent.id}`)
         }
 
 
