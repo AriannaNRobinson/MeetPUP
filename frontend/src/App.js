@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import AllEvents from "./components/Events/AllEvents";
 // import { getEvents } from "./store/events";
 import CreateEvent from "./components/Events/CreateEvent";
+import Splash from "./components/Splash"
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path={'/'}>
+            <Splash />
+          </Route>
           <Route exact path={'/events'}>
             <AllEvents events={events} />
           </Route>
@@ -35,14 +39,12 @@ function App() {
             <CreateEvent userId={userId} />
           </Route>
           <Route path='/events/:id'>
-            <p>jdskfsjfs
-              sjdflskjfskl
-              dsjfsklfjsfljs
-              jdfslkjksjsl
-              lksdfkjsklfjsf
-              sdjkfjslfjdskljfsdk
-              djfsjskdjfsdldj
-            </p>
+            <p>testing details page for singular event</p>
+            <p>testing details page for singular event</p>
+            <p>testing details page for singular event</p>
+            <p>testing details page for singular event</p>
+            <p>testing details page for singular event</p>
+            <p>testing details page for singular event</p>
           </Route>
         </Switch>
       )}
