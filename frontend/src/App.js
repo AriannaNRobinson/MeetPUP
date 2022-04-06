@@ -6,7 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllEvents from "./components/Events/AllEvents";
-import { getEvents } from "./store/events";
+// import { getEvents } from "./store/events";
 import CreateEvent from "./components/Events/CreateEvent";
 
 function App() {
@@ -14,9 +14,10 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const eventsObj = useSelector((state) => state.events)
-  console.log(eventsObj)
+  const userId = useSelector((state) => state.session.user?.id)
+  // console.log(userId)
   const events = Object.values(eventsObj)
-  console.log(events)
+  // console.log(events)
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     // dispatch(getEvents())
@@ -31,11 +32,18 @@ function App() {
             <AllEvents events={events} />
           </Route>
           <Route path="/events/new">
-            <CreateEvent />
+            <CreateEvent userId={userId} />
           </Route>
-          {/* <Route path="/signup">
-            <SignupFormPage />
-          </Route> */}
+          <Route path='/events/:id'>
+            <p>jdskfsjfs
+              sjdflskjfskl
+              dsjfsklfjsfljs
+              jdfslkjksjsl
+              lksdfkjsklfjsf
+              sdjkfjslfjdskljfsdk
+              djfsjskdjfsdldj
+            </p>
+          </Route>
         </Switch>
       )}
     </>

@@ -1,37 +1,51 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { postEvent } from "../../store/events";
+import { useHistory } from "react-router-dom";
+
+import './CreateEvent.css'
 
 
-const CreateEvent = () => {
+const CreateEvent = ({ userId }) => {
     const [eventName, setEventName] = useState('')
     const [description, setDescription] = useState('')
     const [date, setDate] = useState('')
     const [capacity, setCapacity] = useState('')
     // const[hostUserId, setHostUserId] = useState('')
-    const [location, setLocation] = useState('')
+    const [locationId, setLocation] = useState('')
     // const [group, setGroup] = useState('')
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        const newEvent = {
-            eventName,
+        const formData = {
+            name: eventName,
             description,
             date,
             capacity,
-            location,
+            locationId,
+            hostUserId: userId,
+            groupId: null
         }
-        // console.log(newEvent)
 
-        setEventName('');
-        setDescription('');
-        setDate('');
-        setCapacity('')
-        setLocation('');
+        const newEvent = await dispatch(postEvent(formData))
+        console.log(newEvent)
+        if (newEvent) {
+            history.push(`/events/${newEvent.id}`)
+        }
+
+
+        // setEventName('');
+        // setDescription('');
+        // setDate('');
+        // setCapacity('')
+        // setLocation('');
     }
 
     return (
-        <div>
-            <form onSubmit={onSubmit}>
+        <div className='form-container'>
+            <form className='create-event-form' onSubmit={onSubmit}>
                 <div>
                     <div>
                         <h2>Create Event</h2>
@@ -55,7 +69,7 @@ const CreateEvent = () => {
                     </div>
                     <div>
                         <label htmlFor='select-location'>Location</label>
-                        <select value={location} id='select-location' onChange={(e) => setLocation(e.target.value)} required>
+                        <select value={locationId} id='select-location' onChange={(e) => setLocation(e.target.value)} required>
                             <option value='' disabled>Select a Location</option>
                             <option value={1}>Conestee Dog Park</option>
                             <option value={2}>Off The Chain Dog Park Bar</option>
