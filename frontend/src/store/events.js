@@ -10,12 +10,13 @@ export const getEvents = () => async (dispatch) => {
     if (res.ok) {
         const events = await res.json()
         dispatch(viewEvents(events))
+        return events
     }
 }
 
 const initialState = {};
 
-const eventsReducer = (state = {}, action) => {
+const eventsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case VIEW_EVENTS:
