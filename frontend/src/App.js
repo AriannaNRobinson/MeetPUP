@@ -6,9 +6,11 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllEvents from "./components/Events/AllEvents";
-// import { getEvents } from "./store/events";
+import { getEvents } from "./store/events";
 import CreateEvent from "./components/Events/CreateEvent";
 import Splash from "./components/Splash"
+import SingleEventDetails from "./components/Events/EventDetails";
+// import EditEvent from './components/Events/EditEventModal/EditEvent'
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ function App() {
   // console.log(events)
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-    // dispatch(getEvents())
+    dispatch(getEvents())
   }, [dispatch]);
 
   return (
@@ -38,14 +40,12 @@ function App() {
           <Route path="/events/new">
             <CreateEvent userId={userId} />
           </Route>
-          <Route path='/events/:id'>
-            <p>testing details page for singular event</p>
-            <p>testing details page for singular event</p>
-            <p>testing details page for singular event</p>
-            <p>testing details page for singular event</p>
-            <p>testing details page for singular event</p>
-            <p>testing details page for singular event</p>
+          <Route exact path='/events/:id'>
+            <SingleEventDetails events={events} userId={userId} />
           </Route>
+          {/* <Route path="/events/edit">
+            <EditEvent events={events} />
+          </Route> */}
         </Switch>
       )}
     </>

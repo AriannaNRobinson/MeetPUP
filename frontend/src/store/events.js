@@ -1,7 +1,9 @@
 import { csrfFetch } from "./csrf"
 
 const VIEW_EVENTS = 'events/VIEW_EVENTS'
-const CREATE_EVENT = 'events/POST_EVENT'
+const CREATE_EVENT = 'events/CREATE_EVENT'
+const UPDATE_EVENT = 'events/UPDATE_EVENT'
+// const DESTROY_EVENT = 'events/DESTROY_EVENT'
 
 const viewEvents = (events) => ({
     type: VIEW_EVENTS,
@@ -12,6 +14,16 @@ const createEvent = (newEvent) => ({
     type: CREATE_EVENT,
     newEvent
 })
+
+const updateEvent = (myEvent) => ({
+    type: UPDATE_EVENT,
+    myEvent
+})
+
+// const destroyEvent = (eventId) => ({
+//     type: DESTROY_EVENT,
+//     eventId
+// })
 
 export const getEvents = () => async (dispatch) => {
     const res = await fetch('/api/events/')
@@ -38,6 +50,33 @@ export const postEvent = (formData) => async (dispatch) => {
     }
 }
 
+export const editEvent = (formData, eventId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+
+    if (res.ok) {
+        const myEvent = await res.json();
+        dispatch(updateEvent(myEvent))
+        return myEvent;
+    }
+}
+
+// export const deleteEvent = (eventId) => async (dispatch) => {
+//     const res = await csrfFetch(`/api/events/${eventId}`, {
+//         method: 'DELETE'
+//     })
+//     if (res.ok) {
+//         const event = await res.json();
+//         dispatch(destroyEvent(event))
+//     }
+// }
+
+
 const initialState = {};
 
 const eventsReducer = (state = initialState, action) => {
@@ -50,7 +89,15 @@ const eventsReducer = (state = initialState, action) => {
         case CREATE_EVENT:
             newState = { ...state }
             newState = { ...newState, [action.newEvent.id]: action.newEvent }
-
+            return newState;
+        case UPDATE_EVENT:
+            newState = { ...state }
+            newState = { ...newState, [action.myEvent.id]: action.myEvent }
+            return newState;
+        // case DESTROY_EVENT:
+        //     newState = { ...state }
+        //     delete newState[action.eventId]
+        //     return newState;
         default:
             return state;
     }

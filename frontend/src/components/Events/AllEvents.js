@@ -8,9 +8,9 @@ import App from '../../App';
 const AllEvents = ({ events }) => {
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getEvents())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getEvents())
+    // }, [dispatch])
 
     const redirectToSingleEvent = (e) => {
         e.preventDefault();
