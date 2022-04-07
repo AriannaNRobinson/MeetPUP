@@ -9,16 +9,9 @@
 //     .notEmpty()
 //     .withMessage('Cannot be empty')
 
-// const now = new Date();
-// console.log(now)
 // const checkDate = check('date')
 //     .notEmpty()
-//     .isDate({ min: now })
-//     .withMessage('Event cannot be in the past')
-
-// const checkCapacity = check('capacity')
-//     .isInt({ min: 0 })
-//     .withMessage('Must be a number')
+//     .withMessage('Cannot be empty')
 
 // const checkHostId = check('hostId')
 //     .notEmpty()
@@ -29,12 +22,23 @@
 //     .isInt({ min: 0 })
 
 
-// exports.validateCreate = [
-//     checkName,
-//     checkDescription,
-//     checkDate,
-//     checkCapacity,
-//     checkHostId,
-//     checkLocationId,
+// const validateCreate = [
+//     check('name')
+//     .notEmpty()
+//     .withMessage('Cannot be empty'),
+//     check('description')
+//     .notEmpty()
+//     .withMessage('Cannot be empty'),
+//     check('date')
+//     .notEmpty()
+//     .withMessage('Cannot be empty'),
+//     check('hostId')
+//     .notEmpty()
+//     .isInt({ min: 0 }),
+//     check('locationId')
+//     .notEmpty()
+//     .isInt({ min: 0 }),
 //     handleValidationErrors
 // ]
+
+// module.exports = {validateCreate}

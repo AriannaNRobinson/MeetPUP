@@ -31,7 +31,7 @@ const CreateEvent = ({ userId }) => {
 
         const newEvent = await dispatch(postEvent(formData))
         if (newEvent) {
-            history.push(`/events/${newEvent.newEvent.id}`)
+            history.push(`/events/${newEvent.id}`)
         }
         // setEventName('');
         // setDescription('');

@@ -4,7 +4,22 @@ const asyncHandler = require('express-async-handler')
 const router = express.Router();
 
 const { Event } = require('../../db/models');
-// const eventValidations = require('../../utils/validateEvents/events')
+// const { validateCreate } = require('../../utils/validateEvents/events')
+const { check } = require("express-validator");
+const { handleValidationErrors } = require('../../utils/validation');
+
+const validateCreate = [
+    check('name')
+    .notEmpty()
+    .withMessage('Cannot be empty'),
+    check('description')
+    .notEmpty()
+    .withMessage('Cannot be empty'),
+    check('date')
+    .notEmpty()
+    .withMessage('Cannot be empty'),
+    handleValidationErrors
+]
 
 // GET ALL EVENTS /api/events/
 router.get('/', asyncHandler(async (req, res) => {
@@ -18,7 +33,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     return res.json(event)
 }))
 // CREATE NEW EVENT /api/events
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', validateCreate, asyncHandler(async (req, res) => {
     const { name, description, date, capacity, hostUserId, locationId, groupId } = req.body;
     const newEvent = Event.build({
         name,
@@ -30,7 +45,7 @@ router.post('/', asyncHandler(async (req, res) => {
         groupId
     })
     await newEvent.save();
-    res.json({ newEvent, message: 'New event was created' })
+    res.json( newEvent)
 }))
 //TESTING
 // window.fetch('/api/events/', {
