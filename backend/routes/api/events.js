@@ -66,7 +66,7 @@ router.post('/', validateCreate, asyncHandler(async (req, res) => {
 //   }).then(res => res.json()).then(data => console.log(data));
 
 // EDIT EVENT /api/events/:eventId
-router.put('/:id(\\d+)', asyncHandler(async (req, res) => {
+router.put('/:id(\\d+)', validateCreate, asyncHandler(async (req, res) => {
     const { name, description, date, capacity, locationId } = req.body;
     const eventId = parseInt(req.params.id, 10);
     const event = await Event.findByPk(eventId);
