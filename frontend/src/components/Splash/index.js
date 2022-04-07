@@ -1,14 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import './Splash.css';
 // import leocatchingball from '../../../public/leo-catching-ball.png'
+import leocatchingball from '../../images/leo-catching-ball2.png'
 
 const Splash = () => {
 
     return (
         <>
             <div className='form-container'>
-            <img  src='public/leo-catching-ball.png' alt='leocatchingball'></img>
                 <h2 id='splash-title'>Welcome to Meet...PUP!</h2>
+                <img  src={leocatchingball} alt='leocatchingball'></img>
                 <div className='inner-container'>
                     <p className='splash' id='about'> If you love dogs and want to
                         meet like-minded people in your area, you've come to the right

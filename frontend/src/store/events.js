@@ -71,8 +71,9 @@ export const deleteEvent = (eventId) => async (dispatch) => {
         method: 'DELETE'
     })
     if (res.ok) {
-        const deleteEvent = await res.json();
-        dispatch(destroyEvent(deleteEvent))
+        // const deleteEvent = await res.json();
+        // dispatch(destroyEvent(deleteEvent))
+        dispatch(destroyEvent(eventId))
     }
 }
 
@@ -96,7 +97,7 @@ const eventsReducer = (state = initialState, action) => {
             return newState;
         case DESTROY_EVENT:
             newState = { ...state }
-            delete newState[action.deleteEvent.id]
+            delete newState[action.eventId]
             return newState;
         default:
             return state;

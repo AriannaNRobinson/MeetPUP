@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler')
 const router = express.Router();
 
 const { Event } = require('../../db/models');
+// const eventValidations = require('../../utils/validateEvents/events')
 
 // GET ALL EVENTS /api/events/
 router.get('/', asyncHandler(async (req, res) => {
