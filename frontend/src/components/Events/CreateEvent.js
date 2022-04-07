@@ -33,13 +33,25 @@ const CreateEvent = ({ userId }) => {
         if (newEvent) {
             history.push(`/events/${newEvent.newEvent.id}`)
         }
-
-
         // setEventName('');
         // setDescription('');
         // setDate('');
         // setCapacity('')
         // setLocation('');
+    }
+    const startDate = () => {
+        let now = new Date();
+        let month = now.getMonth() + 1;
+        if (month < 10) {
+            month = '0' + month.toString()
+        }
+        let day = now.getDate()
+        if (day < 10) {
+            day = '0' + day.toString()
+        }
+        let year = now.getFullYear();
+        let start = `${year}-${month}-${day}`
+        return start;
     }
 
     return (
@@ -60,7 +72,7 @@ const CreateEvent = ({ userId }) => {
                     </div>
                     <div>
                         <label htmlFor='date'>Date</label>
-                        <input id='date' type='date' onChange={(e) => setDate(e.target.value)} value={date} required />
+                        <input id='date' type='date' min={startDate()} onChange={(e) => setDate(e.target.value)} value={date} required />
                     </div>
                     <div>
                         <label htmlFor='capacity'>* Max Capacity</label>
