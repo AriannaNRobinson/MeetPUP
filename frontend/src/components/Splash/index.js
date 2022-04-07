@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import './Splash.css'
+import './Splash.css';
+// import leocatchingball from '../../../public/leo-catching-ball.png'
 
 const Splash = () => {
 
     return (
         <>
-            <div> ***IMG GOES HERE ****</div>
             <div className='form-container'>
+            <img  src='public/leo-catching-ball.png' alt='leocatchingball'></img>
                 <h2 id='splash-title'>Welcome to Meet...PUP!</h2>
                 <div className='inner-container'>
                     <p className='splash' id='about'> If you love dogs and want to
@@ -15,7 +16,7 @@ const Splash = () => {
                         no one is there? No humans to socialize with? No other pups for your
                         pup to play with? BORING!!! Meet PUP can help! Join events near you,
                         or host your own event today! </p>
-                        <p className='splash'> View upcoming events such as scheduled hikes and dog park hangouts!</p>
+                    <p className='splash'> View upcoming events such as scheduled hikes and dog park hangouts!</p>
                     <NavLink to={'/events'}>
                         <button className='button'>Events</button>
                     </NavLink>
