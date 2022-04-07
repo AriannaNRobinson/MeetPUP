@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import './EventDetails.css';
 
-import { getEvents } from "../../store/events";
+import { deleteEvent, getEvents } from "../../store/events";
 import EditFormModal from './EditEventModal';
 
 const SingleEventDetails = ({ events, userId }) => {
@@ -14,6 +14,15 @@ const SingleEventDetails = ({ events, userId }) => {
         return event.id === parseInt(id, 10)
     })
     const event = matchedEvent[0];
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        dispatch(deleteEvent(event?.id))
+        history.push('/events')
+    }
 
     return (
         <div id='detail-container'>
@@ -30,7 +39,7 @@ const SingleEventDetails = ({ events, userId }) => {
                 <div className='edit-delete-container'>
                     {/* <button className='button'>Edit</button> */}
                     <EditFormModal event={event} />
-                    <button className='button'>Delete</button>
+                    <button onClick={handleDelete} className='button'>Delete</button>
                 </div>
             )}
             <div className='events'>There is a max of {event?.capacity} pups allowed at this event.</div>

@@ -51,10 +51,10 @@ router.post('/', asyncHandler(async (req, res) => {
 
 // EDIT EVENT /api/events/:eventId
 router.put('/:id(\\d+)', asyncHandler(async (req, res) => {
-    const { name, description, date, capacity } = req.body;
+    const { name, description, date, capacity, locationId } = req.body;
     const eventId = parseInt(req.params.id, 10);
     const event = await Event.findByPk(eventId);
-    event.set({ name, description, date, capacity });
+    event.set({ name, description, date, capacity, locationId });
     await event.save();
     return res.json(event)
 }))

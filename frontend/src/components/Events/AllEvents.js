@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getEvents } from '../../store/events';
 import './AllEvents.css';
 import App from '../../App';
+import { NavLink } from 'react-router-dom';
 
 const AllEvents = ({ events }) => {
     const dispatch = useDispatch()
@@ -11,11 +12,6 @@ const AllEvents = ({ events }) => {
     // useEffect(() => {
     //     dispatch(getEvents())
     // }, [dispatch])
-
-    const redirectToSingleEvent = (e) => {
-        e.preventDefault();
-
-    }
 
     return (
         <div id='all-events-container'>
@@ -25,7 +21,9 @@ const AllEvents = ({ events }) => {
                     <div className='events' key={event.id}>
                         <div className='name-and-button'>
                             <p id='event-name'>{event.name}</p>
-                            <button className='button' id='details-button' onClick={redirectToSingleEvent}>Details</button>
+                            <NavLink to={`/events/${event.id}`}>
+                                <button className='button' id='details-button'>Details</button>
+                            </NavLink>
                             <button className='button'>RSVP</button>
                         </div>
                         <div className='event-details'>
@@ -37,7 +35,9 @@ const AllEvents = ({ events }) => {
                 ))}
                 <div className='new-event'>
                     <h2 id='host-event'>Host your own event!</h2>
-                    <i id='create-event' className='fa-regular fa-square-plus'></i>
+                    <NavLink to='/events/new'>
+                        <i id='create-event' className='fa-regular fa-square-plus'></i>
+                    </NavLink>
                 </div>
             </div>
         </div>

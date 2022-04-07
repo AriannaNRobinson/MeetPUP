@@ -14,7 +14,7 @@ const EditEvent = ({ event, setShowModal }) => {
     // const [group, setGroup] = useState('')
     const dispatch = useDispatch();
     const history = useHistory();
-    // console.log(event.id)
+    console.log(locationId);
 
     const onSubmit = async (e) => {
         e.preventDefault();

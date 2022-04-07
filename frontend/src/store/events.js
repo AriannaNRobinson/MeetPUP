@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf"
 const VIEW_EVENTS = 'events/VIEW_EVENTS'
 const CREATE_EVENT = 'events/CREATE_EVENT'
 const UPDATE_EVENT = 'events/UPDATE_EVENT'
-// const DESTROY_EVENT = 'events/DESTROY_EVENT'
+const DESTROY_EVENT = 'events/DESTROY_EVENT'
 
 const viewEvents = (events) => ({
     type: VIEW_EVENTS,
@@ -20,10 +20,10 @@ const updateEvent = (myEvent) => ({
     myEvent
 })
 
-// const destroyEvent = (eventId) => ({
-//     type: DESTROY_EVENT,
-//     eventId
-// })
+const destroyEvent = (eventId) => ({
+    type: DESTROY_EVENT,
+    eventId
+})
 
 export const getEvents = () => async (dispatch) => {
     const res = await fetch('/api/events/')
@@ -66,15 +66,15 @@ export const editEvent = (formData, eventId) => async (dispatch) => {
     }
 }
 
-// export const deleteEvent = (eventId) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/events/${eventId}`, {
-//         method: 'DELETE'
-//     })
-//     if (res.ok) {
-//         const event = await res.json();
-//         dispatch(destroyEvent(event))
-//     }
-// }
+export const deleteEvent = (eventId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        const deleteEvent = await res.json();
+        dispatch(destroyEvent(deleteEvent))
+    }
+}
 
 
 const initialState = {};
@@ -94,10 +94,10 @@ const eventsReducer = (state = initialState, action) => {
             newState = { ...state }
             newState = { ...newState, [action.myEvent.id]: action.myEvent }
             return newState;
-        // case DESTROY_EVENT:
-        //     newState = { ...state }
-        //     delete newState[action.eventId]
-        //     return newState;
+        case DESTROY_EVENT:
+            newState = { ...state }
+            delete newState[action.deleteEvent.id]
+            return newState;
         default:
             return state;
     }
