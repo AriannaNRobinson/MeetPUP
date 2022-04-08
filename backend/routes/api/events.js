@@ -10,14 +10,14 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const validateCreate = [
     check('name')
-    .notEmpty()
-    .withMessage('Cannot be empty'),
+        .notEmpty()
+        .withMessage('Cannot be empty'),
     check('description')
-    .notEmpty()
-    .withMessage('Cannot be empty'),
+        .notEmpty()
+        .withMessage('Cannot be empty'),
     check('date')
-    .notEmpty()
-    .withMessage('Cannot be empty'),
+        .notEmpty()
+        .withMessage('Cannot be empty'),
     handleValidationErrors
 ]
 
@@ -26,7 +26,7 @@ router.get('/', asyncHandler(async (req, res) => {
     const events = await Event.findAll();
     return res.json(events)
 }))
-// GET SINGLE MOVIE /api/events/:eventId
+// GET SINGLE EVENT /api/events/:eventId
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     const eventId = parseInt(req.params.id, 10);
     const event = await Event.findByPk(eventId);
@@ -45,7 +45,7 @@ router.post('/', validateCreate, asyncHandler(async (req, res) => {
         groupId
     })
     await newEvent.save();
-    res.json( newEvent)
+    res.json(newEvent)
 }))
 //TESTING
 // window.fetch('/api/events/', {
