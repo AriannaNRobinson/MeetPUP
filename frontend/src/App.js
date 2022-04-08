@@ -35,7 +35,7 @@ function App() {
             <Splash />
           </Route>
           <Route exact path={'/events'}>
-            <AllEvents events={events} />
+            <AllEvents events={events} userId={userId} />
           </Route>
           <Route path="/events/new">
             <CreateEvent userId={userId} />
