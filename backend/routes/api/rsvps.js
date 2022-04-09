@@ -4,12 +4,12 @@ const asyncHandler = require('express-async-handler');
 
 const router = express.Router();
 
-const { RSVP, User } = require('../../db/models');
+const { RSVP, Event } = require('../../db/models');
 
 // GET ALL RSVPS WITH USERS
 router.get('/', asyncHandler(async (req, res) => {
     const rsvps = await RSVP.findAll({
-        include: User,
+        include: Event,
         // where: {
         //     userId
         // },

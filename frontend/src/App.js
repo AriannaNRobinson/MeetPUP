@@ -6,10 +6,12 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllEvents from "./components/Events/AllEvents";
+import { getRSVPs } from './store/rsvps'
 import { getEvents } from "./store/events";
 import CreateEvent from "./components/Events/CreateEvent";
 import Splash from "./components/Splash"
 import SingleEventDetails from "./components/Events/EventDetails";
+import MyRSVPs from "./components/RSVPs/MyRSVPs";
 // import EditEvent from './components/Events/EditEventModal/EditEvent'
 
 function App() {
@@ -24,11 +26,17 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getEvents())
+    dispatch(getRSVPs())
   }, [dispatch]);
+
+  const rsvpsObj = useSelector((state) => state.rsvps)
+  const rsvps = Object.values(rsvpsObj)
+  // console.log(rsvps)
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <MyRSVPs events={events} userId={userId} rsvps={rsvps} />
       {isLoaded && (
         <Switch>
           <Route exact path={'/'}>
@@ -41,7 +49,7 @@ function App() {
             <CreateEvent userId={userId} />
           </Route>
           <Route exact path='/events/:id'>
-            <SingleEventDetails events={events} userId={userId} />
+            <SingleEventDetails events={events} userId={userId} rsvps={rsvps} />
           </Route>
           {/* <Route path="/events/edit">
             <EditEvent events={events} />

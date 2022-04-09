@@ -6,14 +6,36 @@ import './EventDetails.css';
 import { deleteEvent, getEvents } from "../../store/events";
 import EditFormModal from './EditEventModal';
 
-const SingleEventDetails = ({ events, userId }) => {
+const SingleEventDetails = ({ events, userId, rsvps }) => {
     const { id } = useParams();
-    console.log(userId);
-
+    // console.log(rsvps);
     const matchedEvent = events.filter((event) => {
         return event.id === parseInt(id, 10)
     })
     const event = matchedEvent[0];
+    // console.log(event.id)
+
+    // const testing = rsvps.forEach(rsvp => {
+    //         console.log(rsvp.eventId, '----rsvp.eventId')
+    //         console.log(event.id, '-----event.id')
+    // })
+
+    const matchedRSVP = rsvps.filter((rsvp) => {
+        return parseInt(event?.id, 10) === parseInt(rsvp?.eventId, 10)
+    })
+
+    let counter = () => {
+        let count;
+        if (!matchedRSVP.length) {
+            count = 0;
+        } else {
+            count = matchedRSVP.length
+        }
+        return count;
+    }
+    // console.log(matchedRSVP)
+
+
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -44,7 +66,9 @@ const SingleEventDetails = ({ events, userId }) => {
             )}
             <div className='events'>There is a max of {event?.capacity} pups allowed at this event.</div>
             <div className='rsvp-container'>
-                <div className='events'>There are 0 RSVPs so far.</div>
+                {counter() === 1 ? (<div className='events'>There is {counter()} RSVP so far.</div>) : (
+                    <div className='events'>There are {counter()} RSVPs so far.</div>
+                    )}
                 <button className='button'>RSVP</button>
             </div>
 
