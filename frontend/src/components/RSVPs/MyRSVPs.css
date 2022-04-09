@@ -1,13 +1,51 @@
 .myRSVPs-container {
-    background-color: #0d5d56;
-    border: 2px solid #0d5d56;
-    border-radius: 10px;
+    background-color: #193b39;;
+    border: 2px solid #193b39;;
+    border-radius: 10px 10px 200% 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: fixed;
     left: 0px;
-    top: 80px;
+    top: 120px;
     color: white;
     padding: 10px;
+    width: 20px;
+    height: 60px;
+}
+
+#dog {
+    font-size: 25px;
+    position: absolute;
+    top: 8px;
+    right: 7px;
+}
+
+#dog:hover {
+    font-size: 28px;
+    top: 6px;
+    right: 5px;
+}
+
+.myRSVPs {
+    background-color: #193b39;;
+    border: 2px solid #193b39;;
+    border-radius: 10px 10px 70% 10px;
+    color: white;
+    padding: 20px;
+    padding-top: 0px;
+    position: absolute;
+    top: 50px;
+    left: -3px;
+    width: 200px;
+}
+
+#open {
+    width: 219px;
+    border-radius: 10px;
+}
+
+.myRSVP-event {
+    text-decoration: none;
+    color: white;
 }

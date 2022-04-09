@@ -9,6 +9,11 @@ const viewRSVPs = (rsvps) => ({
     rsvps
 })
 
+const createRSVP = () => ({
+    type: CREATE_RSVP,
+    
+})
+
 export const getRSVPs = () => async (dispatch) => {
     const res = await fetch(`/api/rsvps/`)
     if (res.ok) {
