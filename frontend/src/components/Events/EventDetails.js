@@ -4,48 +4,72 @@ import { useHistory, useParams } from 'react-router-dom';
 import './EventDetails.css';
 
 import { deleteEvent, getEvents } from "../../store/events";
+import { getRSVPs, deleteRSVP, postRSVP } from '../../store/rsvps';
+
 import EditFormModal from './EditEventModal';
 
-const SingleEventDetails = ({ events, userId, rsvps }) => {
+const SingleEventDetails = ({ events, userId }) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const { id } = useParams();
+    const rsvpsObj = useSelector((state) => state.rsvps)
+    const rsvps = Object.values(rsvpsObj)
     // console.log(rsvps);
     const matchedEvent = events.filter((event) => {
         return event.id === parseInt(id, 10)
     })
     const event = matchedEvent[0];
-    // console.log(event.id)
-
-    // const testing = rsvps.forEach(rsvp => {
-    //         console.log(rsvp.eventId, '----rsvp.eventId')
-    //         console.log(event.id, '-----event.id')
-    // })
 
     const matchedRSVP = rsvps.filter((rsvp) => {
         return parseInt(event?.id, 10) === parseInt(rsvp?.eventId, 10)
     })
 
-    let counter = () => {
-        let count;
-        if (!matchedRSVP.length) {
-            count = 0;
-        } else {
-            count = matchedRSVP.length
-        }
-        return count;
-    }
-    // console.log(matchedRSVP)
+    const myRSVPs = rsvps.filter((rsvp) => {
+        return (rsvp?.userId === userId)
+    })
+    console.log(myRSVPs)
 
+    const eventRSVP = myRSVPs.filter((eventRSVP) => {
+        return (eventRSVP?.eventId === +id)
+    })
+    console.log(eventRSVP)
 
+    const rsvpId = eventRSVP[0]?.id;
 
-    const dispatch = useDispatch();
-    const history = useHistory();
+    console.log(rsvpId)
 
+    
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deleteEvent(event?.id))
         history.push('/events')
     }
-
+    
+    const createMyRSVP = (e) => {
+        e.preventDefault();
+        const payload = {
+            userId,
+            eventId: id
+        }
+        dispatch(postRSVP(payload))
+        dispatch(getRSVPs())
+    }
+    
+    const deleteMyRSVP = (e) => {
+        e.preventDefault();
+        dispatch(deleteRSVP(rsvpId))
+        // await dispatch(getRSVPs())
+    }
+    
+    // let counter = () => {
+    //     let count;
+    //     if (!matchedRSVP.length) {
+    //         count = 0;
+    //     } else {
+    //         count = matchedRSVP.length
+    //     }
+    //     return count;
+    // }
     return (
         <div id='detail-container'>
             <h2 id='single-event-title'>{event?.name}</h2>
@@ -66,10 +90,14 @@ const SingleEventDetails = ({ events, userId, rsvps }) => {
             )}
             <div className='events'>There is a max of {event?.capacity} pups allowed at this event.</div>
             <div className='rsvp-container'>
-                {counter() === 1 ? (<div className='events'>There is {counter()} RSVP so far.</div>) : (
-                    <div className='events'>There are {counter()} RSVPs so far.</div>
-                    )}
-                <button className='button'>RSVP</button>
+                {rsvpId ?
+                    <button onClick={deleteMyRSVP} className='button'>RSVP</button> :
+                    <button onClick={createMyRSVP} className='button'>RSVP</button>
+                }
+                {eventRSVP.length === 1 ? (<div className='events'>There is {eventRSVP.length} RSVP so far.</div>) : (
+                    <div className='events'>There are {eventRSVP.length} RSVPs so far.</div>
+                )}
+
             </div>
 
         </div>

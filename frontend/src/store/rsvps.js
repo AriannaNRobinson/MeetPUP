@@ -9,9 +9,14 @@ const viewRSVPs = (rsvps) => ({
     rsvps
 })
 
-const createRSVP = () => ({
+const destroyRSVP = (myRSVP) => ({
+    type: DESTROY_RSVP,
+    myRSVP
+})
+
+const createRSVP = (newRSVP) => ({
     type: CREATE_RSVP,
-    
+    newRSVP
 })
 
 export const getRSVPs = () => async (dispatch) => {
@@ -23,6 +28,32 @@ export const getRSVPs = () => async (dispatch) => {
     }
 }
 
+export const postRSVP = (data) => async (dispatch) => {
+    const res = await csrfFetch('/api/rsvps/', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    if (res.ok) {
+        const newRSVP = await res.json();
+        dispatch(createRSVP(newRSVP))
+        return newRSVP
+    }
+}
+
+export const deleteRSVP = (rsvpId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/rsvps/${rsvpId}`, {
+        method: "DELETE"
+    })
+    if (res.ok) {
+        const deleteRSVP = await res.json()
+        dispatch(destroyRSVP(rsvpId))
+        return deleteRSVP;
+    }
+}
+
 const initialState = {};
 
 const rsvpsReducer = (state = initialState, action) => {
@@ -31,6 +62,14 @@ const rsvpsReducer = (state = initialState, action) => {
         case VIEW_RSVPS:
             newState = { ...state }
             action.rsvps.forEach(rsvp => newState[rsvp.id] = rsvp)
+            return newState;
+        case CREATE_RSVP:
+            newState = { ...state }
+            newState = {...newState, [action.newRSVP.id]: action.newRSVP}
+            return newState;
+        case DESTROY_RSVP:
+            newState = {...state}
+            delete newState[action.myRSVP]
             return newState;
         default:
             return state;

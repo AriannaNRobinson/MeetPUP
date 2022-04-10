@@ -1,14 +1,16 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import './MyRSVPs.css'
 
-const MyRSVPs = ({ events, userId, rsvps }) => {
-
+const MyRSVPs = ({ events, userId }) => {
+    const rsvpsObj = useSelector((state) => state.rsvps)
+    const rsvps = Object.values(rsvpsObj)
     const [toggle, setToggle] = useState(false)
     const [open, setOpen] = useState(false)
 
     const myRSVPs = rsvps.filter((rsvp) => {
-        return (rsvp.userId === userId)
+        return (rsvp?.userId === userId)
     })
 
 
@@ -22,7 +24,7 @@ const MyRSVPs = ({ events, userId, rsvps }) => {
                     <div className='myRSVPs'>
                         <h2>My RSVPs!</h2>
                         {myRSVPs.map(myRSVP => (
-                            <NavLink to={`/events/${myRSVP.Event.id}`} key={myRSVP.id} className='myRSVP-event'>{myRSVP.Event.name}</NavLink>
+                            <NavLink to={`/events/${myRSVP.Event?.id}`} key={myRSVP?.id} className='myRSVP-event'>{myRSVP.Event?.name}</NavLink>
                         ))}
                         <p>hello</p>
                         <p>hello</p>

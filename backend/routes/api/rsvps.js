@@ -23,7 +23,7 @@ router.post('/', asyncHandler(async (req, res) => {
     const newRSVP = RSVP.build(req.body)
     if (newRSVP) {
         await newRSVP.save()
-        res.json(newRSVP)
+        return res.json(newRSVP)
     }
 }))
 
@@ -44,7 +44,7 @@ router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
     const rsvpId = parseInt(req.params.id, 10);
     const rsvp = await RSVP.findByPk(rsvpId);
     await rsvp.destroy();
-    return res.json({ message: 'You are no longer attending this event' })
+    return res.json(rsvp)
 }))
 
 //TESTED DELETE
