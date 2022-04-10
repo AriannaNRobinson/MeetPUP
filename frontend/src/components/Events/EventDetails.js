@@ -27,17 +27,14 @@ const SingleEventDetails = ({ events, userId }) => {
     const myRSVPs = rsvps.filter((rsvp) => {
         return (rsvp?.userId === userId)
     })
-    console.log(myRSVPs)
 
+    console.log(event)
     
     const eventRSVP = myRSVPs.filter((eventRSVP) => {
         return (eventRSVP?.eventId === +id)
     })
-    console.log(eventRSVP)
     
     const rsvpId = eventRSVP[0]?.id;
-    
-    console.log(rsvpId)
     
     
     const deleteAllRSVPs = rsvps.filter((rsvp) => {
@@ -85,6 +82,7 @@ const SingleEventDetails = ({ events, userId }) => {
         }
     }
     
+    // console.log(event.User)
     // let counter = () => {
     //     let count;
     //     if (!matchedRSVP.length) {
@@ -100,10 +98,10 @@ const SingleEventDetails = ({ events, userId }) => {
             <div className='details'>
                 <div className='events'>This event will occur on: {event?.date.split('-')[1]}-{event?.date.split('-')[2]}-{event?.date.split('-')[0]}</div>
                 <div className='events'>It starts at: 2:00 PM</div>
-                <div className='events'>Meeting at: {event?.locationId}</div>
+                <div className='events'>Meeting at: {event?.Location?.name}</div>
                 <div className='events'>About the event: {event?.description}</div>
             </div>
-            <div className='events'>This event is hosted by: {event?.hostUserId}</div>
+            <div className='events'>This event is hosted by: {event?.User?.username}</div>
             <p className='blank'></p>
             {event?.hostUserId === userId && (
                 <div className='edit-delete-container'>
