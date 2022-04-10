@@ -24,9 +24,11 @@ function App() {
   const events = Object.values(eventsObj)
   // console.log(events)
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-    dispatch(getEvents())
-    dispatch(getRSVPs())
+    // (async () => {
+      dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+      dispatch(getEvents())
+      dispatch(getRSVPs())
+    // })();
   }, [dispatch]);
 
   const rsvpsObj = useSelector((state) => state.rsvps)
@@ -36,7 +38,9 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <MyRSVPs events={events} userId={userId} rsvps={rsvps} />
+      {isLoaded && (
+        <MyRSVPs userId={userId} rsvps={rsvps} />
+      )}
       {isLoaded && (
         <Switch>
           <Route exact path={'/'}>

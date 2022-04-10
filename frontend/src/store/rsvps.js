@@ -20,12 +20,13 @@ const createRSVP = (newRSVP) => ({
 })
 
 export const getRSVPs = () => async (dispatch) => {
-    const res = await fetch(`/api/rsvps/`)
+    const res = await csrfFetch(`/api/rsvps/`)
     if (res.ok) {
         const rsvps = await res.json()
         dispatch(viewRSVPs(rsvps))
         return rsvps;
     }
+    return res
 }
 
 export const postRSVP = (data) => async (dispatch) => {
@@ -41,6 +42,7 @@ export const postRSVP = (data) => async (dispatch) => {
         dispatch(createRSVP(newRSVP))
         return newRSVP
     }
+    return res
 }
 
 export const deleteRSVP = (rsvpId) => async (dispatch) => {
@@ -52,6 +54,7 @@ export const deleteRSVP = (rsvpId) => async (dispatch) => {
         dispatch(destroyRSVP(rsvpId))
         return deleteRSVP;
     }
+    return res
 }
 
 const initialState = {};

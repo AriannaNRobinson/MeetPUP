@@ -20,7 +20,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 router.post('/', asyncHandler(async (req, res) => {
-    const newRSVP = RSVP.build(req.body)
+    const newRSVP = await RSVP.build(req.body)
     if (newRSVP) {
         await newRSVP.save()
         return res.json(newRSVP)

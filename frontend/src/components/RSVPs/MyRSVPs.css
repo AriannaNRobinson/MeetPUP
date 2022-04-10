@@ -38,6 +38,8 @@
     top: 50px;
     left: -3px;
     width: 200px;
+    display: flex;
+    flex-direction: column;
 }
 
 #open {

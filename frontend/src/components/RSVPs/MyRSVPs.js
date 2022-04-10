@@ -1,14 +1,20 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { getRSVPs } from '../../store/rsvps'
 import './MyRSVPs.css'
 
-const MyRSVPs = ({ events, userId }) => {
+const MyRSVPs = ({  userId  }) => {
+    const [toggle, setToggle] = useState(false)
+    // const [open, setOpen] = useState(false)
+    const dispatch = useDispatch()
+    
+    useEffect(()=> {
+        dispatch(getRSVPs())
+    }, [dispatch])
+    
     const rsvpsObj = useSelector((state) => state.rsvps)
     const rsvps = Object.values(rsvpsObj)
-    const [toggle, setToggle] = useState(false)
-    const [open, setOpen] = useState(false)
-
     const myRSVPs = rsvps.filter((rsvp) => {
         return (rsvp?.userId === userId)
     })
