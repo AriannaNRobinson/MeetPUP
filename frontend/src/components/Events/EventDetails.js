@@ -20,6 +20,10 @@ const SingleEventDetails = ({ events, userId }) => {
     })
     const event = matchedEvent[0];
 
+    useEffect(() => {
+        dispatch(getEvents())
+    }, [dispatch])
+
     // const matchedRSVP = rsvps.filter((rsvp) => {
     //     return parseInt(event?.id, 10) === parseInt(rsvp?.eventId, 10)
     // })

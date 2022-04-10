@@ -37,7 +37,8 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 // CREATE NEW EVENT /api/events
 router.post('/', validateCreate, asyncHandler(async (req, res) => {
     const { name, description, date, capacity, hostUserId, locationId, groupId } = req.body;
-    const newEvent = Event.build({
+
+    const newEvent = await Event.build({
         name,
         description,
         date,

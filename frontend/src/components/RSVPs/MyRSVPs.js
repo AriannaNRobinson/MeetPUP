@@ -29,11 +29,9 @@ const MyRSVPs = ({  userId  }) => {
                 {toggle ? (
                     <div className='myRSVPs'>
                         <h2>My RSVPs!</h2>
-                        {myRSVPs.map(myRSVP => (
+                        {myRSVPs.length ? myRSVPs.map(myRSVP => (
                             <NavLink to={`/events/${myRSVP.Event?.id}`} key={myRSVP?.id} className='myRSVP-event'>{myRSVP.Event?.name}</NavLink>
-                        ))}
-                        <p>hello</p>
-                        <p>hello</p>
+                        )) : <p>No RSVPs yet!</p>}
                     </div>
                 ) : null}
             </div>
