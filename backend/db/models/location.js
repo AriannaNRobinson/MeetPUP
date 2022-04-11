@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Location.associate = function (models) {
     // associations can be defined here
-    Location.belongsTo(models.Event, { foreignKey: 'locationId' })
+    Location.hasMany(models.Event, { foreignKey: 'locationId' })
   };
   return Location;
 };

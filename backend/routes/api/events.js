@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler')
 
 const router = express.Router();
 
-const { Event } = require('../../db/models');
+const { Event, User, Location } = require('../../db/models');
 // const { validateCreate } = require('../../utils/validateEvents/events')
 const { check } = require("express-validator");
 const { handleValidationErrors } = require('../../utils/validation');
@@ -23,7 +23,9 @@ const validateCreate = [
 
 // GET ALL EVENTS /api/events/
 router.get('/', asyncHandler(async (req, res) => {
-    const events = await Event.findAll();
+    const events = await Event.findAll({
+        include: [User, Location]
+    });
     return res.json(events)
 }))
 // GET SINGLE EVENT /api/events/:eventId
@@ -35,7 +37,8 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 // CREATE NEW EVENT /api/events
 router.post('/', validateCreate, asyncHandler(async (req, res) => {
     const { name, description, date, capacity, hostUserId, locationId, groupId } = req.body;
-    const newEvent = Event.build({
+
+    const newEvent = await Event.build({
         name,
         description,
         date,

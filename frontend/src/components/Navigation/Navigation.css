@@ -180,3 +180,15 @@ h1 {
     border: 2px solid #102524;
     cursor: pointer;
 }
+
+.footer-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer-container > a {
+    margin-left: 5px;
+}

@@ -19,12 +19,15 @@
 
 h2 {
     font-family: cursive;
+    color: white;
+    
 }
 
 label {
     width: 350px;
     margin: 5px;
     text-align: center;
+    color: white;
 }
 
 input {
@@ -48,3 +51,4 @@ input {
 #demo-button {
     margin-bottom: 20px;
 }
+
