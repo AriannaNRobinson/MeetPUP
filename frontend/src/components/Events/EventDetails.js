@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import './EventDetails.css';
@@ -9,6 +9,7 @@ import { getRSVPs, deleteRSVP, postRSVP } from '../../store/rsvps';
 import EditFormModal from './EditEventModal';
 
 const SingleEventDetails = ({ events, userId }) => {
+    const [editFormToggle, setEditFormToggle] = useState(false)
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams();
