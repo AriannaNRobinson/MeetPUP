@@ -14,8 +14,38 @@ const CreateEvent = ({ userId }) => {
     // const[hostUserId, setHostUserId] = useState('')
     const [locationId, setLocation] = useState('')
     // const [group, setGroup] = useState('')
+    const [errors, setErrors] = useState([]);
+
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [eventNameValidator, setEventNameValidator] = useState(true)
+    const [descriptionValidator, setDescriptionValidator] = useState(true)
+    const [capacityValidator, setCapacityValidator] = useState(true)
+
+    useEffect(() => {
+        setEventNameValidator(true)
+        setDescriptionValidator(true)
+        setCapacityValidator(true)
+
+        const errorArr = [];
+        if (eventName.length < 5) {
+            errorArr.push('Event name must be greater than 5 characters')
+            setEventNameValidator(false)
+        }
+        if (description.length < 10) {
+            errorArr.push('Description must be longer than 10 characters')
+            setDescriptionValidator(false)
+        }
+        if (capacity < 2) {
+            errorArr.push('Capacity must be a number greater than 1')
+            setCapacityValidator(false)
+        }
+
+        setErrors(errorArr)
+
+    }, [eventName, description, capacity])
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -28,10 +58,13 @@ const CreateEvent = ({ userId }) => {
             hostUserId: userId,
             groupId: null
         }
-
-        const newEvent = await dispatch(postEvent(formData))
-        if (newEvent) {
-            history.push(`/events/${newEvent.id}`)
+        if (!eventNameValidator || !descriptionValidator || !capacityValidator) {
+            return;
+        } else {
+            const newEvent = await dispatch(postEvent(formData))
+            if (newEvent) {
+                history.push(`/events/${newEvent.id}`)
+            }
         }
         // setEventName('');
         // setDescription('');
@@ -57,29 +90,31 @@ const CreateEvent = ({ userId }) => {
     return (
         <div className='form-container'>
             <form className='create-event-form' onSubmit={onSubmit}>
-                <div>
+                <div className='inner-form-container'>
                     <div>
-                        <h2>Create Event</h2>
-                        <p>Fields with a * are optional.</p>
+                        <h2 className='event-h2'>Create Event</h2>
+                        {errors && errors.map((error, i) => (
+                            <div className='error-message' key={i}>{error}</div>
+                        ))}
                     </div>
                     <div>
                         <label htmlFor='name'>Event Name:</label>
-                        <input id='name' type='text' onChange={(e) => setEventName(e.target.value)} value={eventName} required />
+                        <input maxLength='30' id='name' type='text' onChange={(e) => setEventName(e.target.value)} value={eventName} required />
                     </div>
                     <div>
                         <label htmlFor='description'>Description:</label>
-                        <textarea id='description' onChange={(e) => setDescription(e.target.value)} value={description} required />
+                        <textarea maxLength='200' placeholder='Describe your event! Include the specifics, start time/end time, etc.' id='description' onChange={(e) => setDescription(e.target.value)} value={description} required />
                     </div>
                     <div>
-                        <label htmlFor='date'>Date</label>
+                        <label htmlFor='date'>Date:</label>
                         <input id='date' type='date' min={startDate()} onChange={(e) => setDate(e.target.value)} value={date} required />
                     </div>
                     <div>
-                        <label htmlFor='capacity'>* Max Capacity</label>
-                        <input id='capacity' type='number' onChange={(e) => setCapacity(e.target.value)} value={capacity} />
+                        <label htmlFor='capacity'>Max # of pups allowed:</label>
+                        <input id='capacity' max='200' type='number' onChange={(e) => setCapacity(e.target.value)} value={capacity} required />
                     </div>
                     <div>
-                        <label htmlFor='select-location'>Location</label>
+                        <label htmlFor='select-location'>Location:</label>
                         <select value={locationId} id='select-location' onChange={(e) => setLocation(e.target.value)} required>
                             <option value='' disabled>Select a Location</option>
                             <option value={1}>Conestee Dog Park</option>

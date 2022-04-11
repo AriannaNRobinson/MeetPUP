@@ -102,7 +102,6 @@ const SingleEventDetails = ({ events, userId }) => {
             <h2 id='single-event-title'>{event?.name}</h2>
             <div className='details'>
                 <div className='events'>This event will occur on: {event?.date.split('-')[1]}-{event?.date.split('-')[2]}-{event?.date.split('-')[0]}</div>
-                <div className='events'>It starts at: 2:00 PM</div>
                 <div className='events'>Meeting at: {event?.Location?.name}</div>
                 <div className='events'>About the event: {event?.description}</div>
             </div>
@@ -112,7 +111,7 @@ const SingleEventDetails = ({ events, userId }) => {
                 <div className='edit-delete-container'>
                     {/* <button className='button'>Edit</button> */}
                     <EditFormModal event={event} />
-                    <button onClick={handleDelete} className='button'>Delete</button>
+                    <button onClick={handleDelete} id='delete-button' className='button'>Delete</button>
                 </div>
             )}
             <div className='events'>There is a max of {event?.capacity} pups allowed at this event.</div>
@@ -120,7 +119,10 @@ const SingleEventDetails = ({ events, userId }) => {
                 {eventRSVP.length === 1 ? (<div className='events'>There is {eventRSVP.length} RSVP so far.</div>) : (
                     <div className='events'>There are {eventRSVP.length} RSVPs so far.</div>
                     )}
-                    <button onClick={handleRSVP} className='button'>RSVP</button>
+                    <button onClick={handleRSVP} className='rsvp button'>
+                        <p id='rsvp-word'>RSVP</p>
+                        <i id={rsvpId ? 'yesRSVP' : 'noRSVP'} className='rsvp-bone fa-solid fa-bone'></i>
+                        </button>
                 {/* {rsvpId ?
                     <button onClick={deleteMyRSVP} className='button'>RSVP</button> :
                     <button onClick={createMyRSVP} className='button'>RSVP</button>

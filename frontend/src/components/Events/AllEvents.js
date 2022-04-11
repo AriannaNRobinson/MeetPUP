@@ -23,8 +23,25 @@ const AllEvents = ({ events, userId }) => {
         <div id='all-events-container'>
             <h2 id='all-events-title'>Upcoming Events</h2>
             <div>
+            <div className='new-event'>
+                    <h2 id='host-event'>Host your own event!</h2>
+                    {userId ? (
+                        <NavLink to='/events/new'>
+                            <i id='create-event' className='fa-regular fa-square-plus'></i>
+                        </NavLink>) : (
+                        <div>
+                            <i id='create-event' className='fa-regular fa-square-plus' onClick={() => setShowModal(true)}></i>
+                            {showModal && (
+                                <Modal onClose={() => setShowModal(false)}>
+                                    <LoginForm />
+                                </Modal>
+                            )}
+                        </div>
+                    )}
+                </div>
                 {events.map(event => (
                     <div className='events' key={event.id}>
+                        <p className='blank'></p>
                         <div className='name-and-button'>
                             <p id='event-name'>{event.name}</p>
                             {userId ? (
@@ -43,7 +60,7 @@ const AllEvents = ({ events, userId }) => {
                             {/* <NavLink to={`/events/${event.id}`}>
                                 <button className='button' id='details-button'>Details</button>
                             </NavLink> */}
-                            {userId ? (
+                            {/* {userId ? (
                                 <button className='button'>RSVP</button>
                             ) : (
                                 <div>
@@ -54,17 +71,17 @@ const AllEvents = ({ events, userId }) => {
                                         </Modal>
                                     )}
                                 </div>
-                            )}
+                            )} */}
                             {/* <button className='button'>RSVP</button> */}
                         </div>
                         <div className='event-details'>
                             <p>Date: {event.date.split('-')[1]}-{event.date.split('-')[2]}-{event.date.split('-')[0]}</p>
                             <p>Description: {event.description}</p>
                         </div>
-                        <p className='blank'></p>
+                        {/* <p className='blank'></p> */}
                     </div>
                 ))}
-                <div className='new-event'>
+                {/* <div className='new-event'>
                     <h2 id='host-event'>Host your own event!</h2>
                     {userId ? (
                         <NavLink to='/events/new'>
@@ -79,7 +96,7 @@ const AllEvents = ({ events, userId }) => {
                             )}
                         </div>
                     )}
-                </div>
+                </div> */}
             </div>
         </div>
     )

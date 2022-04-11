@@ -31,6 +31,10 @@
     text-align: center;
 }
 
+.edit-event-form-btn {
+    width: 160px;
+}
+
 .events {
     padding: 10px;
     text-align: center;
@@ -49,4 +53,37 @@
 
 .edit-delete-container {
     align-self: center;
+    margin: 20px;
 }
+
+#yesRSVP {
+    color: green;
+    font-size: 26px;
+}
+
+#noRSVP {
+    color: red;
+}
+
+.rsvp{
+display: flex;
+align-items: center;
+justify-content: space-evenly;
+}
+
+#rsvp-word{
+    color: white;
+}
+
+.rsvp-bone {
+    font-size: 18px;
+}
+
+#delete-button {
+    margin-left: 10px;
+}
+
+.edit-form-container {
+    margin:0px;
+}
+
