@@ -192,3 +192,9 @@ h1 {
 .footer-container > a {
     margin-left: 5px;
 }
+
+.page-not-found {
+    color: red;
+    margin: 80px;
+    margin-top: 150px;
+}

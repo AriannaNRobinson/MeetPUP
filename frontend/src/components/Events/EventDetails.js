@@ -7,6 +7,7 @@ import { deleteEvent, getEvents } from "../../store/events";
 import { getRSVPs, deleteRSVP, postRSVP } from '../../store/rsvps';
 
 import EditFormModal from './EditEventModal';
+import PageNotFound from '../PageNotFound';
 
 
 const SingleEventDetails = ({ events, userId }) => {
@@ -98,13 +99,13 @@ const SingleEventDetails = ({ events, userId }) => {
     //     }
     //     return count;
     // }
-    if (event === undefined) {
-        history.push('/Page-Not-Found')
-    }
+    // if (event === undefined) {
+    //     history.push('/Page-Not-Found')
+    // }
 
     return (
         <>
-            {/* {event ? */}
+            {event ?
                 <div id='detail-container'>
                     <h2 id='single-event-title'>{event?.name}</h2>
                     <div className='details'>
@@ -136,7 +137,7 @@ const SingleEventDetails = ({ events, userId }) => {
                 } */}
                     </div>
                 </div>
-                {/* // : <PageNotFound />} */}
+                 : <PageNotFound />}
         </>
     )
 }
