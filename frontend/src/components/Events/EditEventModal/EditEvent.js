@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { postEvent, editEvent } from "../../../store/events";
+import { editEvent } from "../../../store/events";
 import { useHistory } from "react-router-dom";
 
 

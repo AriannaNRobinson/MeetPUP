@@ -12,7 +12,8 @@
 }
 
 .create-event-form {
-    margin: 60px;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 #date {
@@ -40,10 +41,10 @@
 }
 
 .inner-form-container {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     margin-left: 10%;
     margin-right: 10%;
 }
@@ -65,4 +66,27 @@
     padding-right: 20px;
     width: auto;
     text-align: center;
+}
+
+.error-message {
+    color: red;
+}
+
+.create-form > div {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: flex-start;
+}
+
+.createbtn {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 30px;
+    padding-right: 10px;
+}
+
+.errs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

@@ -35,6 +35,9 @@ const MyRSVPs = ({  userId  }) => {
                     </div>
                 ) : null}
             </div>
+            <div className='event-sidebar'>
+                <NavLink to='/events'>Events</NavLink>
+            </div>
         </div>
     )
 }

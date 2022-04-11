@@ -9,7 +9,7 @@ function EditFormModal({event}) {
     const [showModal, setShowModal] = useState(false);
     useEffect(() => {
         dispatch(getEvents())
-    },[showModal])
+    },[showModal, dispatch])
     return (
         <>
             <button className='button' onClick={() => setShowModal(true)}>Edit</button>

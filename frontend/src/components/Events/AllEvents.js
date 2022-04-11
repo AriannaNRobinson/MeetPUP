@@ -1,23 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+// import { useDispatch} from 'react-redux';
 
-import { getEvents } from '../../store/events';
 import './AllEvents.css';
-import App from '../../App';
+
 import { NavLink } from 'react-router-dom';
 
 import { Modal } from '../../context/Modal'
-import LoginFormModal from '../LoginFormModal';
+
 import LoginForm from '../LoginFormModal/LoginForm'
 import '../../context/Modal.css'
 
 const AllEvents = ({ events, userId }) => {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false);
     // useEffect(() => {
     //     dispatch(getEvents())
     // }, [dispatch])
-    console.log(userId)
+    // console.log(userId)
 
     return (
         <div id='all-events-container'>

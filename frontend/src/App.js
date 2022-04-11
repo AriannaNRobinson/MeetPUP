@@ -12,6 +12,8 @@ import CreateEvent from "./components/Events/CreateEvent";
 import Splash from "./components/Splash"
 import SingleEventDetails from "./components/Events/EventDetails";
 import MyRSVPs from "./components/RSVPs/MyRSVPs";
+import Footer from "./components/Footer";
+import PageNotFound from "./components/PageNotFound";
 // import EditEvent from './components/Events/EditEventModal/EditEvent'
 
 function App() {
@@ -25,9 +27,9 @@ function App() {
   // console.log(events)
   useEffect(() => {
     // (async () => {
-      dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-      dispatch(getEvents())
-      dispatch(getRSVPs())
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getEvents())
+    dispatch(getRSVPs())
     // })();
   }, [dispatch]);
 
@@ -39,7 +41,10 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <MyRSVPs userId={userId} rsvps={rsvps} />
+        <>
+          <MyRSVPs userId={userId} rsvps={rsvps} />
+          <Footer />
+        </>
       )}
       {isLoaded && (
         <Switch>
@@ -49,15 +54,15 @@ function App() {
           <Route exact path={'/events'}>
             <AllEvents events={events} userId={userId} />
           </Route>
-          <Route path="/events/new">
+          <Route exact path="/events/new">
             <CreateEvent userId={userId} />
           </Route>
           <Route exact path='/events/:id'>
             <SingleEventDetails events={events} userId={userId} rsvps={rsvps} />
           </Route>
-          {/* <Route path="/events/edit">
-            <EditEvent events={events} />
-          </Route> */}
+          <Route>
+            <PageNotFound />
+          </Route>
         </Switch>
       )}
     </>

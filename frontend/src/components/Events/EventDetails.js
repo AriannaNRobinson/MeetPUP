@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import './EventDetails.css';
@@ -8,8 +8,9 @@ import { getRSVPs, deleteRSVP, postRSVP } from '../../store/rsvps';
 
 import EditFormModal from './EditEventModal';
 
+
 const SingleEventDetails = ({ events, userId }) => {
-    const [editFormToggle, setEditFormToggle] = useState(false)
+    
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams();
@@ -33,15 +34,15 @@ const SingleEventDetails = ({ events, userId }) => {
         return (rsvp?.userId === userId)
     })
 
-    console.log(event)
-    
+    // console.log(event)
+
     const eventRSVP = myRSVPs.filter((eventRSVP) => {
         return (eventRSVP?.eventId === +id)
     })
-    
+
     const rsvpId = eventRSVP[0]?.id;
-    
-    
+
+
     const deleteAllRSVPs = rsvps.filter((rsvp) => {
         return (rsvp?.eventId === +id)
     })
@@ -53,10 +54,10 @@ const SingleEventDetails = ({ events, userId }) => {
         })
         // await dispatch(getRSVPs())
         await dispatch(deleteEvent(event?.id))
-        
+
         history.push('/events')
     }
-    
+
     // const createMyRSVP = async (e) => {
     //     e.preventDefault();
     //     const payload = {
@@ -65,28 +66,28 @@ const SingleEventDetails = ({ events, userId }) => {
     //     }
     //     dispatch(postRSVP(payload))
     // }
-    
+
     // const deleteMyRSVP = (e) => {
-        //     e.preventDefault();
-        //     dispatch(deleteRSVP(rsvpId))
-        //     // await dispatch(getRSVPs())
-        // }
-        
-        const handleRSVP = async () => {
-            if (userId) {
-                if (!rsvpId) {
-                    const payload = {
-                        userId,
-                        eventId: id
-                    }
-                    dispatch(postRSVP(payload))
-                    await dispatch(getRSVPs())
+    //     e.preventDefault();
+    //     dispatch(deleteRSVP(rsvpId))
+    //     // await dispatch(getRSVPs())
+    // }
+
+    const handleRSVP = async () => {
+        if (userId) {
+            if (!rsvpId) {
+                const payload = {
+                    userId,
+                    eventId: id
+                }
+                dispatch(postRSVP(payload))
+                await dispatch(getRSVPs())
             } else {
                 dispatch(deleteRSVP(rsvpId))
             }
         }
     }
-    
+
     // console.log(event.User)
     // let counter = () => {
     //     let count;
@@ -97,40 +98,46 @@ const SingleEventDetails = ({ events, userId }) => {
     //     }
     //     return count;
     // }
+    if (event === undefined) {
+        history.push('/Page-Not-Found')
+    }
+
     return (
-        <div id='detail-container'>
-            <h2 id='single-event-title'>{event?.name}</h2>
-            <div className='details'>
-                <div className='events'>This event will occur on: {event?.date.split('-')[1]}-{event?.date.split('-')[2]}-{event?.date.split('-')[0]}</div>
-                <div className='events'>Meeting at: {event?.Location?.name}</div>
-                <div className='events'>About the event: {event?.description}</div>
-            </div>
-            <div className='events'>This event is hosted by: {event?.User?.username}</div>
-            <p className='blank'></p>
-            {event?.hostUserId === userId && (
-                <div className='edit-delete-container'>
-                    {/* <button className='button'>Edit</button> */}
-                    <EditFormModal event={event} />
-                    <button onClick={handleDelete} id='delete-button' className='button'>Delete</button>
-                </div>
-            )}
-            <div className='events'>There is a max of {event?.capacity} pups allowed at this event.</div>
-            <div className='rsvp-container'>
-                {eventRSVP.length === 1 ? (<div className='events'>There is {eventRSVP.length} RSVP so far.</div>) : (
-                    <div className='events'>There are {eventRSVP.length} RSVPs so far.</div>
+        <>
+            {/* {event ? */}
+                <div id='detail-container'>
+                    <h2 id='single-event-title'>{event?.name}</h2>
+                    <div className='details'>
+                        <div className='events'>This event will occur on: {event?.date.split('-')[1]}-{event?.date.split('-')[2]}-{event?.date.split('-')[0]}</div>
+                        <div className='events'>Meeting at: {event?.Location?.name}</div>
+                        <div className='events'>About the event: {event?.description}</div>
+                    </div>
+                    <div className='events'>This event is hosted by: {event?.User?.username}</div>
+                    <p className='blank'></p>
+                    {event?.hostUserId === userId && (
+                        <div className='edit-delete-container'>
+                            {/* <button className='button'>Edit</button> */}
+                            <EditFormModal event={event} />
+                            <button onClick={handleDelete} id='delete-button' className='button'>Delete</button>
+                        </div>
                     )}
-                    <button onClick={handleRSVP} className='rsvp button'>
-                        <p id='rsvp-word'>RSVP</p>
-                        <i id={rsvpId ? 'yesRSVP' : 'noRSVP'} className='rsvp-bone fa-solid fa-bone'></i>
+                    <div className='events'>There is a max of {event?.capacity} pups allowed at this event.</div>
+                    <div className='rsvp-container'>
+                        {eventRSVP.length === 1 ? (<div className='events'>There is {eventRSVP.length} RSVP so far.</div>) : (
+                            <div className='events'>There are {eventRSVP.length} RSVPs so far.</div>
+                        )}
+                        <button onClick={handleRSVP} className='rsvp button'>
+                            <p id='rsvp-word'>RSVP</p>
+                            <i id={rsvpId ? 'yesRSVP' : 'noRSVP'} className='rsvp-bone fa-solid fa-bone'></i>
                         </button>
-                {/* {rsvpId ?
+                        {/* {rsvpId ?
                     <button onClick={deleteMyRSVP} className='button'>RSVP</button> :
                     <button onClick={createMyRSVP} className='button'>RSVP</button>
                 } */}
-
-            </div>
-
-        </div>
+                    </div>
+                </div>
+                {/* // : <PageNotFound />} */}
+        </>
     )
 }
 
