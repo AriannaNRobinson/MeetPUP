@@ -9,16 +9,16 @@ const MyRSVPs = ({  userId  }) => {
     // const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
     
-    useEffect(()=> {
-        dispatch(getRSVPs())
-    }, [dispatch])
     
     const rsvpsObj = useSelector((state) => state.rsvps)
     const rsvps = Object.values(rsvpsObj)
     const myRSVPs = rsvps.filter((rsvp) => {
         return (rsvp?.userId === userId)
     })
-
+    
+    useEffect(()=> {
+        dispatch(getRSVPs())
+    }, [dispatch])
 
     return (
         <div>

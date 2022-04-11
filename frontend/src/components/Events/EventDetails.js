@@ -30,6 +30,10 @@ const SingleEventDetails = ({ events, userId }) => {
     // const matchedRSVP = rsvps.filter((rsvp) => {
     //     return parseInt(event?.id, 10) === parseInt(rsvp?.eventId, 10)
     // })
+    const eventAllRSVP = rsvps.filter((eventRSVP) => {
+        return (eventRSVP?.eventId === +id)
+    })
+    console.log(eventAllRSVP)
 
     const myRSVPs = rsvps.filter((rsvp) => {
         return (rsvp?.userId === userId)
@@ -40,6 +44,7 @@ const SingleEventDetails = ({ events, userId }) => {
     const eventRSVP = myRSVPs.filter((eventRSVP) => {
         return (eventRSVP?.eventId === +id)
     })
+    console.log(eventRSVP)
 
     const rsvpId = eventRSVP[0]?.id;
 
@@ -124,8 +129,8 @@ const SingleEventDetails = ({ events, userId }) => {
                     )}
                     <div className='events'>There is a max of {event?.capacity} pups allowed at this event.</div>
                     <div className='rsvp-container'>
-                        {eventRSVP.length === 1 ? (<div className='events'>There is {eventRSVP.length} RSVP so far.</div>) : (
-                            <div className='events'>There are {eventRSVP.length} RSVPs so far.</div>
+                        {eventAllRSVP.length === 1 ? (<div className='events'>There is {eventAllRSVP.length} RSVP so far.</div>) : (
+                            <div className='events'>There are {eventAllRSVP.length} RSVPs so far.</div>
                         )}
                         <button onClick={handleRSVP} className='rsvp button'>
                             <p id='rsvp-word'>RSVP</p>
