@@ -1,16 +1,21 @@
 'use strict';
 
-// // NEW: add this code to each create table migration file
-// let options = {};
-// if (process.env.NODE_ENV === 'production') {
-//   options.schema = process.env.SCHEMA;  // define your schema in options object
-// }
-// // END of new code
+// NEW: add this code to each create table migration file
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+// END of new code
 
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Groups', [
+        // new
+        options.tableName = 'Groups';
+        // end
+    
+        // the below used to say "Groups" instead of options
+    return queryInterface.bulkInsert(options, [
       {
         name: 'Extreme Hikers!',
         description: 'This is a group for extremely active dog owners. We frequently go on 5 mile walks & hikes on the weekends. We like to stay as active as our pups!'
@@ -43,6 +48,11 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Groups', null, {});
+        // new
+        options.tableName = 'Groups';
+        // end
+    
+        // the below used to say "Groups" instead of options
+    return queryInterface.bulkDelete(options, null, {});
   }
 };

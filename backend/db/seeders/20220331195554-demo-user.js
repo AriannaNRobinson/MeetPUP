@@ -1,17 +1,22 @@
 'use strict';
 const bcrypt = require('bcryptjs');
 
-// // NEW: add this code to each create table migration file
-// let options = {};
-// if (process.env.NODE_ENV === 'production') {
-//   options.schema = process.env.SCHEMA;  // define your schema in options object
-// }
-// // END of new code
+// NEW: add this code to each create table migration file
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+// END of new code
 
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Users', [
+    // new
+    options.tableName = 'Users';
+    // end
+
+    // the below used to say "Users" instead of options
+    return queryInterface.bulkInsert(options, [
       {
         email: 'demo@example.com',
         username: 'DemoUser',
@@ -32,7 +37,12 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Users', {
+        // new
+        options.tableName = 'Users';
+        // end
+    
+        // the below used to say "Users" instead of options
+    return queryInterface.bulkDelete(options, {
       username: { [Op.in]: ['DemoUser', 'JohnDoe', 'JaneDoe'] }
     }, {});
   }
